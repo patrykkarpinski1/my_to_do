@@ -1,45 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:my_to_do/features/home/pages/add_notes_page.dart';
+import 'package:my_to_do/app/core/enums.dart';
+import 'package:my_to_do/app/injection_container.dart';
+import 'package:my_to_do/features/home/cubit/home_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_to_do/features/home/pages/notes_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text('My To Do')),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.all(10),
-              decoration: const BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.all(Radius.circular(20)),
+    return BlocProvider<HomeCubit>(
+      create: (context) => getIt()..start(),
+      child: BlocConsumer<HomeCubit, HomeState>(
+        listener: (context, state) {
+          if (state.status == Status.error) {
+            final errorMessage = state.errorMessage ?? 'Unknown error';
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(errorMessage),
+                backgroundColor: Colors.red,
               ),
-              child: const Text(
-                'title',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.add,
-        ),
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const AddNotesPage()),
-          );
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state.status == Status.initial) {
+            return const Center(
+              child: Text('Initial state'),
+            );
+          }
+          if (state.status == Status.loading) {
+            return const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            );
+          }
+          final noteModels = state.notes;
+          if (state.status == Status.success) {
+            if (state.notes.isEmpty) {
+              return NotesPage(noteModels: noteModels);
+            }
+          }
+
+          return NotesPage(noteModels: noteModels);
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
