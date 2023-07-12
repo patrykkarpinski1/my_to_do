@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_to_do/features/home/pages/add_notes_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -32,7 +33,11 @@ class HomePage extends StatelessWidget {
         child: const Icon(
           Icons.add,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const AddNotesPage()),
+          );
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
