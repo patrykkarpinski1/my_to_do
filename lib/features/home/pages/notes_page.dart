@@ -27,10 +27,38 @@ class NotesPage extends StatelessWidget {
               const Center(
                 child: Text('Your list is empty, add a task.'),
               ),
-            ],
-            for (final noteModel in noteModels) ...[
-              NoteWidget(noteModel: noteModel),
-            ]
+            ] else
+              for (final noteModel in noteModels) ...[
+                Dismissible(
+                  key: ValueKey(noteModel.id),
+                  background: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      color: Colors.red,
+                      child: const Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 32.0),
+                          child: Icon(
+                            Icons.delete,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  confirmDismiss: (direction) async {
+                    // only from right to left
+                    return direction == DismissDirection.endToStart;
+                  },
+                  onDismissed: (direction) {
+                    context.read<HomeCubit>().remove(documentID: noteModel.id);
+                  },
+                  child: NoteWidget(noteModel: noteModel),
+                ),
+              ]
           ],
         ),
       ),

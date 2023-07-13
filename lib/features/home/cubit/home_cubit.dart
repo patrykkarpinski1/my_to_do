@@ -44,9 +44,10 @@ class HomeCubit extends Cubit<HomeState> {
     return super.close();
   }
 
-  Future<void> remove({required int documentID}) async {
+  Future<void> remove({required String documentID}) async {
     try {
       await localRepository.deleteNote(id: documentID);
+      start();
     } catch (error) {
       emit(
         state.copyWith(
@@ -74,7 +75,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  Future<void> getNoteWithID(int id) async {
+  Future<void> getNoteWithID(String id) async {
     emit(
       const HomeState(status: Status.loading, noteModel: null),
     );

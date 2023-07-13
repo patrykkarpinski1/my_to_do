@@ -10,16 +10,29 @@ class NoteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
-        color: Colors.blue,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-      ),
-      child: Text(
-        noteModel.title,
-        style: const TextStyle(fontSize: 20),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        color: const Color.fromARGB(255, 226, 223, 223),
+        child: ListTile(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Text(
+                  noteModel.title,
+                  style: const TextStyle(fontSize: 20),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.navigate_next)),
+            ],
+          ),
+        ),
       ),
     );
   }

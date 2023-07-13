@@ -37,12 +37,10 @@ class HomePage extends StatelessWidget {
           }
           final noteModels = state.notes;
           if (state.status == Status.success) {
-            if (state.notes.isEmpty) {
-              return NotesPage(noteModels: noteModels);
-            }
+            return NotesPage(noteModels: noteModels);
           }
 
-          return NotesPage(noteModels: noteModels);
+          return const SizedBox.shrink();
         },
       ),
     );
