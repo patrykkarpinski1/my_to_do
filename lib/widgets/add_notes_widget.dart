@@ -15,8 +15,9 @@ class AddNotesWidget extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: ListView(children: [
         TextField(
+          style: const TextStyle(fontSize: 20),
           onChanged: onTitleChanged,
-          maxLength: 75,
+          maxLength: 30,
           maxLines: 1,
           decoration: const InputDecoration(
             hintText: 'Title',
@@ -25,7 +26,7 @@ class AddNotesWidget extends StatelessWidget {
         ),
         TextField(
           onChanged: onTextChanged,
-          maxLines: 30,
+          maxLines: 40,
           decoration: const InputDecoration(
             border: InputBorder.none,
             hintText: 'Text',

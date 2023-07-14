@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_to_do/features/home/pages/detalis_note_page.dart';
 import 'package:my_to_do/models/note_model.dart';
 
 class NoteWidget extends StatelessWidget {
@@ -29,7 +30,27 @@ class NoteWidget extends StatelessWidget {
                 ),
               ),
               IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.navigate_next)),
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: false).push(
+                      PageRouteBuilder(
+                        transitionDuration: const Duration(milliseconds: 500),
+                        pageBuilder: (_, __, ___) => DetailsNotePage(
+                          id: noteModel.id,
+                        ),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          return SlideTransition(
+                            position: Tween<Offset>(
+                              begin: const Offset(-1.0, 0.0),
+                              end: Offset.zero,
+                            ).animate(animation),
+                            child: child,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.navigate_next)),
             ],
           ),
         ),
