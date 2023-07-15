@@ -45,23 +45,51 @@ class DetailsNotePage extends StatelessWidget {
           final noteModel = state.noteModel;
 
           return Scaffold(
-            backgroundColor: Colors.grey,
-            body: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListView(
-                children: [
-                  Center(
-                    child: Text(
-                      noteModel?.title ?? 'Unkown',
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
+            backgroundColor: Colors.transparent,
+            body: Container(
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                    Color.fromARGB(209, 255, 255, 255),
+                    Color.fromARGB(116, 255, 255, 255),
+                  ])),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView(
+                  children: [
+                    Center(
+                      child: Text(
+                        noteModel?.title ?? 'Unkown',
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Text(noteModel?.text ?? 'Unkown')
-                ],
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Text(noteModel?.text ?? 'Unkown')
+                  ],
+                ),
+              ),
+            ),
+            floatingActionButton: Container(
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Colors.indigo, Colors.blueGrey],
+                ),
+                borderRadius: BorderRadius.circular(55),
+              ),
+              child: FloatingActionButton(
+                backgroundColor: Colors.transparent,
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                },
+                child: const Icon(
+                  Icons.arrow_back_ios_new,
+                  color: Colors.black,
+                ),
               ),
             ),
           );

@@ -45,6 +45,7 @@ dependencies:
   freezed_annotation: ^2.2.0
   path_provider: ^2.0.15
   uuid: ^3.0.7
+  new_gradient_app_bar: ^0.2.0
 
 dev_dependencies:
   flutter_test:

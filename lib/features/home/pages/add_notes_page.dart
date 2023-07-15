@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_to_do/app/core/enums.dart';
 import 'package:my_to_do/features/home/cubit/home_cubit.dart';
 import 'package:my_to_do/widgets/add_notes_widget.dart';
+import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
 class AddNotesPage extends StatefulWidget {
   const AddNotesPage({super.key});
@@ -34,7 +35,10 @@ class _AddNotesPageState extends State<AddNotesPage> {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          appBar: NewGradientAppBar(
+            gradient:
+                const LinearGradient(colors: [Colors.indigo, Colors.blueGrey]),
             actions: [
               IconButton(
                   onPressed: text == null || title == null
@@ -48,17 +52,27 @@ class _AddNotesPageState extends State<AddNotesPage> {
                   icon: const Icon(Icons.check))
             ],
           ),
-          body: AddNotesWidget(
-            onTitleChanged: (newValue) {
-              setState(() {
-                title = newValue;
-              });
-            },
-            onTextChanged: (newValue) {
-              setState(() {
-                text = newValue;
-              });
-            },
+          body: Container(
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                  Color.fromARGB(209, 255, 255, 255),
+                  Color.fromARGB(116, 255, 255, 255),
+                ])),
+            child: AddNotesWidget(
+              onTitleChanged: (newValue) {
+                setState(() {
+                  title = newValue;
+                });
+              },
+              onTextChanged: (newValue) {
+                setState(() {
+                  text = newValue;
+                });
+              },
+            ),
           ),
         );
       },
