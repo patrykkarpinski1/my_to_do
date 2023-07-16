@@ -17,4 +17,16 @@ class NoteModel extends HiveObject {
 
   @HiveField(2)
   String text;
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is NoteModel &&
+        other.id == id &&
+        other.title == title &&
+        other.text == text;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ title.hashCode ^ text.hashCode;
 }
