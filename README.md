@@ -1,16 +1,16 @@
-# my_to_do
+# My To Do
 
-A new Flutter project.
+The application is used to create and read your own notes. The application uses the local Hive database.
 
-## Getting Started
+### Technologies used:
+- Dart
+- Flutter
+- Hive
+- Bloc & Cubit
+- Injectable
+- Freezed
+- Get_it
+- Uuid
+- Unit tests
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+https://github.com/patrykkarpinski1/my_to_do/assets/119192369/b591b652-8863-4a26-840c-a71de374391e
