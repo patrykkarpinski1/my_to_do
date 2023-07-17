@@ -4,6 +4,7 @@ import 'package:my_to_do/features/home/pages/add_notes_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_to_do/models/note_model.dart';
 import 'package:my_to_do/widgets/note_widget.dart';
+import 'package:my_to_do/widgets/pulsating_image_widget.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
 class NotesPage extends StatelessWidget {
@@ -37,9 +38,13 @@ class NotesPage extends StatelessWidget {
           child: ListView(
             children: [
               if (noteModels.isEmpty) ...[
-                const Center(
-                  child: Text('Your list is empty, add a task.'),
-                ),
+                Column(children: const [
+                  Text('Your list is empty, add a task.'),
+                  SizedBox(
+                    height: 200,
+                  ),
+                  PulsatingImageWidget()
+                ]),
               ] else
                 for (final noteModel in noteModels) ...[
                   Dismissible(
